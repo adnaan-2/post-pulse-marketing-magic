@@ -2,11 +2,12 @@
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +21,11 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Check if we're on the dashboard pages
+  const isDashboard = location.pathname.includes('/dashboard');
+
+  if (isDashboard) return null;
 
   return (
     <header
@@ -35,6 +41,7 @@ const Header = () => {
               <li><a href="#features" className="hover:text-primary transition-colors">Features</a></li>
               <li><a href="#about" className="hover:text-primary transition-colors">About</a></li>
               <li><a href="#pricing" className="hover:text-primary transition-colors">Pricing</a></li>
+              <li><Link to="/dashboard" className="hover:text-primary transition-colors">Dashboard</Link></li>
             </ul>
           </nav>
         </div>
@@ -66,6 +73,7 @@ const Header = () => {
           <a href="#features" className="text-xl" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
           <a href="#about" className="text-xl" onClick={() => setIsMobileMenuOpen(false)}>About</a>
           <a href="#pricing" className="text-xl" onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
+          <Link to="/dashboard" className="text-xl" onClick={() => setIsMobileMenuOpen(false)}>Dashboard</Link>
           <div className="flex flex-col space-y-3 mt-4">
             <Button variant="ghost" asChild>
               <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>Login</Link>
