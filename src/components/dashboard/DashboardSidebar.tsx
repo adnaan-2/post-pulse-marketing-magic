@@ -2,13 +2,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
-  Home, 
+  LayoutDashboard, 
   Link as LinkIcon, 
   Calendar, 
   Upload, 
   PlusCircle, 
   BarChart3, 
-  Settings
+  Settings,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 
 interface DashboardSidebarProps {
@@ -20,7 +22,7 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
   const location = useLocation();
   
   const navItems = [
-    { label: "Dashboard", icon: Home, path: "/dashboard" },
+    { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
     { label: "Link Accounts", icon: LinkIcon, path: "/dashboard/link-accounts" },
     { label: "Schedule Posts", icon: Calendar, path: "/dashboard/schedule" },
     { label: "Upload Posts", icon: Upload, path: "/dashboard/upload" },
@@ -33,70 +35,77 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
   return (
     <aside 
       className={`${
-        isOpen ? "w-64" : "w-0 md:w-16"
-      } transition-width duration-300 ease-in-out fixed md:relative inset-y-0 left-0 z-50 
-      bg-white dark:bg-gray-900 border-r shadow-sm overflow-y-auto`}
+        isOpen ? "w-64" : "w-20"
+      } transition-all duration-300 ease-in-out fixed md:relative inset-y-0 left-0 z-50 
+      bg-background/80 backdrop-blur-md border-r shadow-lg overflow-y-auto`}
     >
-      <div className="p-4 flex items-center justify-center md:justify-start">
-        {isOpen ? (
-          <Link to="/dashboard" className="flex items-center gap-2 text-primary font-bold text-xl">
-            <div className="flex flex-col items-center">
-              <div className="flex">
-                <div className="w-3 h-3 bg-primary"></div>
-                <div className="w-3 h-3 bg-primary ml-1"></div>
-              </div>
-              <div className="flex mt-1">
-                <div className="w-3 h-3 bg-primary"></div>
-                <div className="w-3 h-3 bg-primary ml-1"></div>
-              </div>
+      <div className="p-4 flex items-center justify-between">
+        <Link to="/dashboard" className={`flex items-center gap-2 text-primary font-bold ${isOpen ? 'text-xl' : 'text-sm justify-center w-full'}`}>
+          <div className="flex flex-col items-center">
+            <div className="flex">
+              <div className="w-3 h-3 bg-primary rounded-sm"></div>
+              <div className="w-3 h-3 bg-primary/70 ml-1 rounded-sm"></div>
             </div>
-            <span>ContentFlow</span>
-          </Link>
-        ) : (
-          <Link to="/dashboard" className="flex items-center justify-center">
-            <div className="flex flex-col items-center">
-              <div className="flex">
-                <div className="w-2 h-2 bg-primary"></div>
-                <div className="w-2 h-2 bg-primary ml-0.5"></div>
-              </div>
-              <div className="flex mt-0.5">
-                <div className="w-2 h-2 bg-primary"></div>
-                <div className="w-2 h-2 bg-primary ml-0.5"></div>
-              </div>
+            <div className="flex mt-1">
+              <div className="w-3 h-3 bg-primary/70 rounded-sm"></div>
+              <div className="w-3 h-3 bg-primary rounded-sm ml-1"></div>
             </div>
-          </Link>
-        )}
+          </div>
+          {isOpen && <span className="text-gradient-primary">ContentFlow</span>}
+        </Link>
+        
+        <Button
+          variant="ghost"
+          size="icon"
+          className={`${isOpen ? '' : 'hidden'} rounded-full h-8 w-8 hover:bg-primary/20 transition-colors`}
+          onClick={toggleSidebar}
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
       </div>
       
-      <nav className="mt-6 px-2">
+      <div className="mt-6 px-3">
         <ul className="space-y-2">
           {navItems.map((item) => (
             <li key={item.path}>
               <Link 
                 to={item.path}
-                className={`flex items-center px-4 py-3 rounded-lg transition-colors ${
+                className={`flex items-center px-4 py-3 rounded-xl transition-all ${
                   isActive(item.path) 
-                    ? "bg-primary/10 text-primary" 
-                    : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                    ? "bg-primary text-primary-foreground shadow-md" 
+                    : "hover:bg-primary/10 text-foreground/80 hover:text-foreground"
                 }`}
               >
-                <item.icon className={`${isOpen ? "mr-3" : "mx-auto"} h-5 w-5`} />
-                {isOpen && <span>{item.label}</span>}
+                <item.icon className={`${isOpen ? "mr-3" : "mx-auto"} h-5 w-5 ${isActive(item.path) ? "" : "text-muted-foreground"}`} />
+                {isOpen && <span className="font-medium">{item.label}</span>}
               </Link>
             </li>
           ))}
         </ul>
-      </nav>
-      
-      <div className="mt-6 px-4">
-        <Button 
-          variant="default" 
-          className="w-full bg-primary hover:bg-primary/90 text-white flex items-center justify-center gap-2"
-        >
-          <Upload className="h-4 w-4" />
-          {isOpen && <span>Transfer Media</span>}
-        </Button>
       </div>
+      
+      {!isOpen && (
+        <Button
+          variant="ghost" 
+          size="icon"
+          className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full h-10 w-10 hover:bg-primary/20 transition-colors"
+          onClick={toggleSidebar}
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button>
+      )}
+      
+      {isOpen && (
+        <div className="absolute bottom-6 left-0 right-0 px-4">
+          <Button 
+            variant="default" 
+            className="w-full bg-gradient-to-r from-primary to-primary/80 hover:bg-primary/90 text-primary-foreground flex items-center justify-center gap-2 rounded-xl shadow-md"
+          >
+            <Upload className="h-4 w-4" />
+            <span>Transfer Media</span>
+          </Button>
+        </div>
+      )}
     </aside>
   );
 };
