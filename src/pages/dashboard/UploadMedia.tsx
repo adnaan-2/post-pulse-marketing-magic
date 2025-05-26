@@ -18,7 +18,11 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+<<<<<<< HEAD
 import { Upload, Plus, X, ImageIcon, Video, CheckCircle } from "lucide-react";
+=======
+import { Upload, Plus, X, ImageIcon, Video } from "lucide-react";
+>>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/components/ui/use-toast";
 

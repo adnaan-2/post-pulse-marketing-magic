@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
@@ -35,8 +39,13 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
     <aside 
       className={`${
         isOpen ? "w-64" : "w-20"
+<<<<<<< HEAD
       } transition-all duration-300 ease-in-out fixed top-0 left-0 z-50 
       h-screen bg-background/80 backdrop-blur-md border-r shadow-lg flex flex-col`}
+=======
+      } transition-all duration-300 ease-in-out fixed md:relative inset-y-0 left-0 z-50 
+      bg-background/80 backdrop-blur-md border-r shadow-lg overflow-y-auto`}
+>>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
     >
       <div className="p-4 flex items-center justify-between">
         <Link to="/dashboard" className={`flex items-center gap-2 text-primary font-bold ${isOpen ? 'text-xl' : 'text-sm justify-center w-full'}`}>
@@ -63,7 +72,11 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
         </Button>
       </div>
       
+<<<<<<< HEAD
       <div className="mt-6 px-3 flex-1 overflow-y-auto">
+=======
+      <div className="mt-6 px-3">
+>>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
         <ul className="space-y-2">
           {navItems.map((item) => (
             <li key={item.path}>
@@ -84,6 +97,7 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
       </div>
       
       {!isOpen && (
+<<<<<<< HEAD
         <div className="mt-auto pb-5 flex justify-center">
           <Button
             variant="ghost" 
@@ -108,6 +122,29 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
     </Button>
   </div>
 )}
+=======
+        <Button
+          variant="ghost" 
+          size="icon"
+          className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full h-10 w-10 hover:bg-primary/20 transition-colors"
+          onClick={toggleSidebar}
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button>
+      )}
+      
+      {isOpen && (
+        <div className="absolute bottom-6 left-0 right-0 px-4">
+          <Button 
+            variant="default" 
+            className="w-full bg-gradient-to-r from-primary to-primary/80 hover:bg-primary/90 text-primary-foreground flex items-center justify-center gap-2 rounded-xl shadow-md"
+          >
+            <Upload className="h-4 w-4" />
+            <span>Transfer Media</span>
+          </Button>
+        </div>
+      )}
+>>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
     </aside>
   );
 };
