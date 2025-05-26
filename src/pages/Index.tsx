@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Header from "../components/landing/Header";
 import Hero from "../components/landing/Hero";
 import Features from "../components/landing/Features";
-import About from "../components/landing/About";
+import {About,MarqueeDemo} from "../components/landing/About";
 import Pricing from "../components/landing/Pricing";
 import Footer from "../components/landing/Footer";
 import { useToast } from "@/hooks/use-toast";
@@ -25,6 +25,7 @@ const Index = () => {
       <Hero />
       <Features />
       <About />
+      <MarqueeDemo />
       <Pricing />
       <Footer />
     </div>

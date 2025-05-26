@@ -1,7 +1,8 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +29,7 @@ const Header = () => {
     >
       <div className="container flex items-center justify-between">
         <div className="flex items-center">
-          <h1 className="text-2xl font-bold">SocialFuse</h1>
+          <Link to="/" className="text-2xl font-bold">ContentFlow</Link>
           <nav className="hidden md:block ml-10">
             <ul className="flex space-x-8">
               <li><a href="#features" className="hover:text-primary transition-colors">Features</a></li>
@@ -39,8 +40,12 @@ const Header = () => {
         </div>
 
         <div className="hidden md:flex items-center space-x-3">
-          <Button variant="ghost">Login</Button>
-          <Button>Start Free</Button>
+          <Button variant="ghost" asChild>
+            <Link to="/login">Login</Link>
+          </Button>
+          <Button asChild>
+            <Link to="/signup">SignUp</Link>
+          </Button>
         </div>
 
         <button 
@@ -62,14 +67,18 @@ const Header = () => {
           <a href="#about" className="text-xl" onClick={() => setIsMobileMenuOpen(false)}>About</a>
           <a href="#pricing" className="text-xl" onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
           <div className="flex flex-col space-y-3 mt-4">
-            <Button variant="ghost">Login</Button>
-            <Button>Start Free</Button>
+            <Button variant="ghost" asChild>
+              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>Login</Link>
+            </Button>
+            <Button asChild>
+              <Link to="/signup" onClick={() => setIsMobileMenuOpen(false)}>SignUp</Link>
+            </Button>
           </div>
           <button 
-            className="absolute top-6 right-6"
+            className="absolute top-6 right-6 flex items-center"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Close
+            <X size={24} /> <span className="ml-1">Close</span>
           </button>
         </div>
       </div>
