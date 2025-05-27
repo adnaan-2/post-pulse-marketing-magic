@@ -7,7 +7,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { User, Key, Camera, Loader2 } from "lucide-react";
 import { authService } from "@/services/api";
-import { useAuth } from "@/contexts/AuthContext"; // Import useAuth
+import { useAuth } from "@/contexts/AuthContext";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -83,7 +83,7 @@ const Profile = () => {
       const updatedUser = response.data;
       localStorage.setItem('user', JSON.stringify(updatedUser));
       setUser(updatedUser);
-      updateUser(updatedUser); // Update global auth context
+      updateUser(updatedUser);
       
       setSuccessMessage('Profile updated successfully!');
       
@@ -164,9 +164,6 @@ const Profile = () => {
     const file = e.target.files?.[0];
     if (!file) return;
     
-    // Log for debugging
-    console.log('Selected file:', file);
-    
     // Check file type
     const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
@@ -187,12 +184,7 @@ const Profile = () => {
       const formData = new FormData();
       formData.append('profileImage', file);
       
-      // Log for debugging
-      console.log('Uploading to:', `${api.defaults.baseURL}/api/profile/image`);
-      console.log('FormData contents:', [...formData.entries()]);
-      
       const response = await authService.uploadProfileImage(formData);
-      console.log('Upload response:', response);
       
       // Update user data with new profile image
       const updatedUser = response.data;
@@ -202,6 +194,7 @@ const Profile = () => {
       
       setSuccessMessage('Profile image updated successfully!');
       
+      // Clear message after 3 seconds
       setTimeout(() => {
         setSuccessMessage('');
       }, 3000);
@@ -364,6 +357,7 @@ const Profile = () => {
                     onChange={handlePasswordChange}
                     required 
                     className="bg-secondary/50"
+                    autoComplete="current-password"
                   />
                 </div>
                 
@@ -377,6 +371,7 @@ const Profile = () => {
                     onChange={handlePasswordChange}
                     required 
                     className="bg-secondary/50"
+                    autoComplete="new-password"
                   />
                 </div>
                 
@@ -390,6 +385,7 @@ const Profile = () => {
                     onChange={handlePasswordChange}
                     required 
                     className="bg-secondary/50"
+                    autoComplete="new-password"
                   />
                 </div>
                 

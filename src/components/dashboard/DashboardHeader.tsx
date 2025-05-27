@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 import { useState } from "react";
 import { Bell, User, ChevronDown, Menu } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-=======
-
-import { useState } from "react";
-import { Bell, User, ChevronDown, Menu } from "lucide-react";
->>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
 import { 
   Avatar, 
   AvatarFallback, 
@@ -21,18 +15,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-<<<<<<< HEAD
 import { useToast } from "@/hooks/use-toast";
-=======
->>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
 
+// Define the proper props interface with toggleSidebar
 interface DashboardHeaderProps {
   toggleSidebar: () => void;
 }
 
 const DashboardHeader = ({ toggleSidebar }: DashboardHeaderProps) => {
   const [notificationCount, setNotificationCount] = useState(3);
-<<<<<<< HEAD
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -54,8 +45,6 @@ const DashboardHeader = ({ toggleSidebar }: DashboardHeaderProps) => {
       .toUpperCase()
       .slice(0, 2) || "U";
   };
-=======
->>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
   
   return (
     <header className="bg-background border-b py-3 px-4 flex items-center justify-between">
@@ -86,26 +75,20 @@ const DashboardHeader = ({ toggleSidebar }: DashboardHeaderProps) => {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 px-2">
               <Avatar className="h-8 w-8">
-<<<<<<< HEAD
                 {user?.profileImage ? (
                   <AvatarImage 
                     src={user.profileImage} 
-                    alt={user.name} 
+                    alt={user?.name || "User"} 
                   />
                 ) : (
                   <AvatarFallback>{getInitials(user?.name || "User")}</AvatarFallback>
                 )}
-=======
-                <AvatarImage src="" />
-                <AvatarFallback>U</AvatarFallback>
->>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
               </Avatar>
               <ChevronDown className="h-4 w-4 text-muted-foreground" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuItem className="flex flex-col items-start">
-<<<<<<< HEAD
               <span className="font-medium">{user?.name || "User Name"}</span>
               <span className="text-xs text-muted-foreground">{user?.email || "user@example.com"}</span>
             </DropdownMenuItem>
@@ -123,17 +106,6 @@ const DashboardHeader = ({ toggleSidebar }: DashboardHeaderProps) => {
             <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
               Log out
             </DropdownMenuItem>
-=======
-              <span className="font-medium">User Name</span>
-              <span className="text-xs text-muted-foreground">user@example.com</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Log out</DropdownMenuItem>
->>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -10,32 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { EyeIcon, EyeOffIcon, UserPlusIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-<<<<<<< HEAD
 import { authService } from "@/services/api";
-=======
-
-// Note: In a real implementation, you'd use your API utility
-// This is a placeholder until the backend is connected
-const mockSignup = async (userData: { name: string; email: string; password: string }) => {
-  // This would be replaced with actual API call
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      // For demo purposes - in real app this would register with backend
-      if (userData.email && userData.password && userData.name) {
-        resolve({
-          data: {
-            success: true,
-            token: "sample-token-12345",
-            user: { id: 1, email: userData.email, name: userData.name }
-          }
-        });
-      } else {
-        reject({ response: { data: { message: "Registration failed" } } });
-      }
-    }, 800);
-  });
-};
->>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -76,7 +47,6 @@ const Signup = () => {
       // Remove confirmPassword before sending to API
       const { confirmPassword, ...signupData } = formData;
       
-<<<<<<< HEAD
       // Call the real API endpoint
       const response = await authService.register(signupData);
       
@@ -95,28 +65,6 @@ const Signup = () => {
         state: { message: "Registration successful! You can now log in." },
         replace: true 
       });
-=======
-      // In real implementation, replace with your actual API call
-      const response: any = await mockSignup(signupData);
-      
-      if (response.data.success) {
-        // Store token and user data
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        
-        // Show success toast
-        toast({
-          title: "Registration successful!",
-          description: "Your account has been created",
-        });
-        
-        // Navigate to login with success message
-        navigate("/login", { 
-          state: { message: "Registration successful! You can now log in." },
-          replace: true 
-        });
-      }
->>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
     } catch (err: any) {
       const errorMessage = err.response?.data?.message || "Registration failed. Please try again.";
       setError(errorMessage);
@@ -130,6 +78,7 @@ const Signup = () => {
     }
   };
 
+  // Rest of your component remains the same...
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md animate-fade-in">
@@ -257,8 +206,4 @@ const Signup = () => {
   );
 };
 
-<<<<<<< HEAD
 export default Signup;
-=======
-export default Signup;
->>>>>>> 70f60395989c162ae0b54d6224742801a2693e16
